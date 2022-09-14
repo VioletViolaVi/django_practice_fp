@@ -20,3 +20,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('animals/', include("animals.urls"))
 ]
+
+handle404 = "animals.views.not_found_404"
