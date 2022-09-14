@@ -5,17 +5,25 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="{% static 'styles/default.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/default.css' %}" />
     <title>Animals!</title>
   </head>
   <body>
+    <nav>
+      <a href="{% url 'animals-home' %}">Animals</a>
+      <a href="{% url 'animals-about' %}">About</a>
+      {% if user.is_authenticated %}
+        <span>Welcome {{ user }}</span>
+        <a href="{% url 'logout' %}">Logout</a>
+      {% else %}
+        <a href="{% url 'login' %}">Login</a>
+      {% endif %}
+    </nav>
+
     <header>
       <h1>{% block header %}{% endblock header %}</h1>
-      <nav>
-        <a href="{% url 'animals-home' %}">Animals</a>
-        <a href="{% url 'animals-about' %}">About</a>
-      </nav>
     </header>
+
     <main>{% block content %}{% endblock content %}</main>
   </body>
 </html>

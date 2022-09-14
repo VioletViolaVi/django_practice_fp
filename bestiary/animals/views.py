@@ -1,5 +1,6 @@
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404
+from django.contrib.auth.decorators import login_required
 
 from .models import Animal
 
@@ -8,7 +9,7 @@ def home(request):
     data = {"animals": Animal.objects.all()}  # like '*' select all selector
     return render(request, "home.html", data)
 
-
+@login_required
 def show(request, id):
     animal = get_object_or_404(Animal, pk=id)
     # one way:
